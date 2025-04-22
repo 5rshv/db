@@ -51,6 +51,7 @@ public class StudentController {
         return ResponseEntity.ok().build();
     }
 
+
     @GetMapping("/all")
     public ResponseEntity<Collection<Student>> getAllStudents() {
         return ResponseEntity.ok(studentService.getAllStudents());

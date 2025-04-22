@@ -20,6 +20,7 @@ public class Faculty {
     @OneToMany(mappedBy = "id")
     private Collection<Student> students;
 
+
     @Override
     public String toString() {
         return "Faculty{" +

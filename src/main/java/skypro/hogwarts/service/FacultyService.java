@@ -23,6 +23,7 @@ public class FacultyService {
         return facultyRepository.findById(id).get();
     }
 
+
     public Faculty editeFaculty(Faculty faculty) {
         Faculty existing = facultyRepository.findById(faculty.getId())
                 .orElseThrow(() -> new EntityNotFoundException("Faculty not found"));
