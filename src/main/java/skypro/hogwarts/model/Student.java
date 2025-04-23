@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -13,17 +12,13 @@ public class Student {
     private String name;
     private int age;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "faculty_id")
-    private Faculty faculty;
-    public Student(long id, String name, int age) {
-
-
+    public Student(long id, int age, String name) {
         this.id = id;
-        this.name = name;
         this.age = age;
+        this.name = name;
     }
 
+    public Student(){}
 
     @Override
     public String toString() {

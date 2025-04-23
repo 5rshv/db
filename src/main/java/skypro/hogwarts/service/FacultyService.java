@@ -9,7 +9,7 @@ import java.util.Collection;
 
 @Service
 public class FacultyService {
-    private FacultyRepository facultyRepository;
+    private  FacultyRepository facultyRepository;
 
     public FacultyService(FacultyRepository facultyRepository) {
         this.facultyRepository = facultyRepository;
@@ -22,7 +22,6 @@ public class FacultyService {
     public Faculty getFaculty(Long id) {
         return facultyRepository.findById(id).get();
     }
-
 
     public Faculty editeFaculty(Faculty faculty) {
         Faculty existing = facultyRepository.findById(faculty.getId())
@@ -43,6 +42,6 @@ public class FacultyService {
     }
 
     public Collection<Faculty> getFacultyByColor(String color) {
-        return facultyRepository.findFacultyByColorIgnoreCase(color);
+        return facultyRepository.findAll().stream().filter(f -> f.getColor().equals(color)).toList();
     }
 }

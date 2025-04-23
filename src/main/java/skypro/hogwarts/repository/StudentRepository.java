@@ -7,8 +7,6 @@ import java.util.Collection;
 
 
 public interface StudentRepository extends JpaRepository<Student, Long> {
-    Collection<Student> findStudentsByAgeBetween(int min, int max);
 
-    Collection<Student> findStudentByNameIgnoreCase(String name);
 }
 
