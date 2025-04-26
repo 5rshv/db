@@ -2,6 +2,7 @@ package skypro.hogwarts.model;
 
 import jakarta.persistence.*;
 
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -11,6 +12,11 @@ public class Student {
     private long id;
     private String name;
     private int age;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "faculty_id")
+    private Faculty faculty;
+
 
     public Student(long id, int age, String name) {
         this.id = id;

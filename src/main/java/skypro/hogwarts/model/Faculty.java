@@ -14,6 +14,9 @@ public class Faculty {
     private String name;
     private String color;
 
+    @OneToMany(mappedBy = "id")
+    private Collection<Student> students;
+
     public Faculty() {}
 
     @Override
