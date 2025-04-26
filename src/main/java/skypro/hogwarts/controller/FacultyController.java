@@ -17,6 +17,7 @@ public class FacultyController {
         this.facultyService = facultyService;
     }
 
+
     @GetMapping("/id/{id}")
     public ResponseEntity<Faculty> getFacultyInfo(@PathVariable Long id) {
         Faculty faculty = facultyService.getFaculty(id);
@@ -51,7 +52,7 @@ public class FacultyController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<Collection<Faculty>> getAllFaculties() {
         return ResponseEntity.ok(facultyService.getAllFaculties());
     }

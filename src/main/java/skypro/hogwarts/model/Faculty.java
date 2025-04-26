@@ -1,10 +1,7 @@
 package skypro.hogwarts.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.util.Collection;
 import java.util.Objects;
@@ -12,13 +9,12 @@ import java.util.Objects;
 @Entity
 public class Faculty {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String name;
     private String color;
 
-    @OneToMany(mappedBy = "id")
-    private Collection<Student> students;
+    public Faculty() {}
 
     @Override
     public String toString() {
@@ -29,7 +25,7 @@ public class Faculty {
                 '}';
     }
 
-    public Faculty(long id, String name, String color) {
+    public Faculty(Long id, String name, String color) {
         this.id = id;
         this.name = name;
         this.color = color;
