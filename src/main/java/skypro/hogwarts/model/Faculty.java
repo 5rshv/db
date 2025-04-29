@@ -7,6 +7,8 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
+@Table (name = "faculty")
+
 public class Faculty {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,8 +16,9 @@ public class Faculty {
     private String name;
     private String color;
 
-    @OneToMany(mappedBy = "id")
+    @OneToMany(mappedBy = "faculty")
     private Collection<Student> students;
+
 
     public Faculty() {}
 
