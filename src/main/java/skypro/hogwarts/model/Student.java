@@ -2,15 +2,22 @@ package skypro.hogwarts.model;
 
 import jakarta.persistence.*;
 
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
+@Table (name = "student")
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String name;
     private int age;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "faculty")
+    private Faculty faculty;
+
 
     public Student(long id, int age, String name) {
         this.id = id;
