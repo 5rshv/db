@@ -15,7 +15,7 @@ public class Student {
     private int age;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "faculty_id")
+    @JoinColumn(name = "faculty")
     private Faculty faculty;
 
 
