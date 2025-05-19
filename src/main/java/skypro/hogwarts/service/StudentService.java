@@ -47,4 +47,14 @@ public class StudentService {
     public Collection<Student> getStundentByName(String name) {
         return studentRepository.findStudentByNameIgnoreCase(name);
     }
+
+    public Collection<Integer> getStudentsAgeAverage() {
+        return studentRepository.getStudentsAgeAverage();
+    }
+    public Collection<Integer> getStudentsId() {
+        return studentRepository.getStudentsId();
+    }
+    public Collection<Integer> getStudentsLastFive() {
+        return studentRepository.getStudentsLastFive();
+    }
 }

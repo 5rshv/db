@@ -2,6 +2,7 @@ package skypro.hogwarts.model;
 
 import jakarta.persistence.*;
 
+import java.awt.print.Pageable;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Objects;
@@ -96,4 +97,5 @@ public class Avatar {
     public Student getStudent() {
         return student;
     }
+
 }
