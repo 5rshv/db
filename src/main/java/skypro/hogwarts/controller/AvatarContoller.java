@@ -1,6 +1,7 @@
 package skypro.hogwarts.controller;
 
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -56,4 +57,13 @@ public class AvatarContoller {
         return ResponseEntity.status(HttpStatus.OK).headers(headers).body(avatar.getData());
     }
 
+    @GetMapping
+    public ResponseEntity<Page<Avatar>> getAllExpenses (
+            @RequestParam ("page") Integer pageNumber,
+            @RequestParam ("size") Integer pageSize
+    )
+    {
+        Page<Avatar> avatarPage = avatarService.getAllAvatar(pageNumber, pageSize);
+        return  ResponseEntity.ok(avatarPage);
+    }
 }

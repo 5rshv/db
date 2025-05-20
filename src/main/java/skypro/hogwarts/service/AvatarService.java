@@ -2,16 +2,19 @@ package skypro.hogwarts.service;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import skypro.hogwarts.model.Avatar;
 import skypro.hogwarts.model.Student;
-import skypro.hogwarts.repository.AvaterRepository;
+import skypro.hogwarts.repository.AvatarRepository;
 import skypro.hogwarts.repository.StudentRepository;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 
 import static java.nio.file.StandardOpenOption.CREATE_NEW;
 
@@ -22,9 +25,9 @@ public class AvatarService {
     private String avatarDir;
 
     private final StudentRepository studentRepository;
-    private final AvaterRepository avaterRepository;
+    private final AvatarRepository avaterRepository;
 
-    public AvatarService(StudentRepository studentRepository, AvaterRepository avaterRepository) {
+    public AvatarService(StudentRepository studentRepository, AvatarRepository avaterRepository) {
         this.studentRepository = studentRepository;
         this.avaterRepository = avaterRepository;
     }
@@ -57,5 +60,10 @@ public class AvatarService {
     }
     public Avatar findAvatar (Long studentId){
         return avaterRepository.findByStudentId(studentId).orElse(new Avatar());
+    }
+
+    public Page<Avatar> getAllAvatar(Integer pageNumber, Integer pageSize){
+        PageRequest pageRequest = PageRequest.of(pageNumber -  1, pageSize);
+        return avaterRepository.findAll(pageRequest);
     }
 }
