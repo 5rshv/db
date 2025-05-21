@@ -1,0 +1,11 @@
+
+-- changeset 5rshv:1
+CREATE TABLE if not exists migration_Faculty (
+    id serial,
+    name TEXT,
+    color TEXT
+)
+
+
+-- changeset 5rshv:2
+CREATE INDEX idx_faculty_name_color ON migration_Faculty (name, color);
