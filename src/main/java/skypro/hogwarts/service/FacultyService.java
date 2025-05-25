@@ -8,11 +8,12 @@ import skypro.hogwarts.model.Faculty;
 import skypro.hogwarts.repository.FacultyRepository;
 
 import java.util.Collection;
+import java.util.Comparator;
 
 @Service
 public class FacultyService {
     private  FacultyRepository facultyRepository;
-    Logger logger = LoggerFactory.getLogger(FacultyService.class);
+    private final Logger logger = LoggerFactory.getLogger(FacultyService.class);
 
     public FacultyService(FacultyRepository facultyRepository) {
         this.facultyRepository = facultyRepository;
@@ -53,4 +54,12 @@ public class FacultyService {
         logger.info("getFacultyByColor");
         return facultyRepository.findFacultyByColorIgnoreCase(color);
     }
+
+    public String getLongFaculties() {
+        logger.info("getLongFaculties");
+        return facultyRepository.findAll().stream()
+                .map(Faculty :: getName)
+                .max(Comparator.comparingInt(String::length))
+                .orElse(null);
+}
 }

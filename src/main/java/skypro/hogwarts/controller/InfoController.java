@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Profile("production")
 public class InfoController {
     @Value("${server.port}")
-    String port;
+    private String port;
 
     @GetMapping("/port")
     public String getPort() {

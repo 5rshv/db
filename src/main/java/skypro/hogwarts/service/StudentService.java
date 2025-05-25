@@ -7,18 +7,20 @@ import skypro.hogwarts.model.Student;
 import skypro.hogwarts.repository.StudentRepository;
 
 import java.util.Collection;
+import java.util.Comparator;
+import java.util.stream.LongStream;
 
 @Service
 public class StudentService {
     private final StudentRepository studentRepository;
-    Logger logger = LoggerFactory.getLogger(StudentService.class);
+    private final Logger logger = LoggerFactory.getLogger(StudentService.class);
 
 
     public StudentService(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
 
-    public Student  createStudent(Student student) {
+    public Student createStudent(Student student) {
         logger.info("createStudent");
         return studentRepository.save(student);
     }
@@ -44,6 +46,15 @@ public class StudentService {
         return studentRepository.findAll();
     }
 
+    public Collection<Student> getAllStudentsByNameA() {
+        logger.info("getAllStudentsByNameA");
+        return studentRepository.findAll().stream()
+                .filter(s -> s.getName().toLowerCase()
+                        .startsWith("a"))
+                .sorted(Comparator.comparing(Student::getName))
+                .toList();
+    }
+
 
     public Collection<Student> getStudentsByAge(int age) {
         logger.info("getStudentsByAge");
@@ -60,16 +71,51 @@ public class StudentService {
         return studentRepository.findStudentByNameIgnoreCase(name);
     }
 
-    public Collection<Integer> getStudentsAgeAverage() {
+    public double getStudentsAgeAverage() {
         logger.info("getStudentsAgeAverage");
-        return studentRepository.getStudentsAgeAverage();
+        return studentRepository.findAll().stream()
+                .mapToInt(Student::getAge)
+                .average()
+                .orElse(0.0);
     }
+
     public Collection<Integer> getStudentsId() {
         logger.info("getStudentsId");
         return studentRepository.getStudentsId();
     }
+
     public Collection<Integer> getStudentsLastFive() {
         logger.info("getStudentsLastFive");
         return studentRepository.getStudentsLastFive();
+    }
+
+    public Long getLongIntTest1() {
+        long start = System.nanoTime();
+        Long result = LongStream.rangeClosed(1, 1_000_000)
+                .parallel()
+                .sum();
+        long finish = System.nanoTime();
+        long informationTime = finish - start;
+        logger.info("information time test 1: start{} , finish{}, informationTime{}", start, finish, informationTime);
+        return result;
+    }
+
+    public Long getLongIntTest2() {
+        long start = System.nanoTime();
+        Long result = ((1L + 1_000_000L) * 1_000_000L / 2);
+        long finish = System.nanoTime();
+        long informationTime = finish - start;
+        logger.info("information time 2: start{} , finish{}, informationTime{}", start, finish, informationTime);
+        return result;
+    }
+
+    public Long getLongIntTest3() {
+        long start = System.nanoTime();
+        Long result = LongStream.rangeClosed(1, 1_000_000)
+                .sum();
+        long finish = System.nanoTime();
+        long informationTime = finish - start;
+        logger.info("information time test 3: start{} , finish{}, informationTime{}", start, finish, informationTime);
+        return result;
     }
 }

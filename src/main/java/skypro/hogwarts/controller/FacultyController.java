@@ -56,4 +56,11 @@ public class FacultyController {
     public ResponseEntity<Collection<Faculty>> getAllFaculties() {
         return ResponseEntity.ok(facultyService.getAllFaculties());
     }
+
+    @GetMapping("/getLongFaculties")
+    public ResponseEntity<String> getLongFaculties() {
+        return ResponseEntity.ok(facultyService.getLongFaculties());
+    }
+
+
 }
