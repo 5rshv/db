@@ -6,7 +6,11 @@ import org.springframework.web.bind.annotation.*;
 import skypro.hogwarts.model.Student;
 import skypro.hogwarts.service.StudentService;
 
+import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.stream.IntStream;
+import java.util.stream.LongStream;
+import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/student")
@@ -63,7 +67,7 @@ public class StudentController {
     }
 
     @GetMapping("/ageBetweenAverage")
-    public Collection<Integer> getStudentAverageAge() {
+    public double getStudentAverageAge() {
         return studentService.getStudentsAgeAverage();
     }
 
@@ -75,5 +79,25 @@ public class StudentController {
     @GetMapping("/getStudentsLastFive")
     public Collection<Integer> getStudentsLastFive() {
         return studentService.getStudentsLastFive();
+    }
+
+    @GetMapping("/getAllStudentsByNameA")
+    public ResponseEntity<Collection<Student>> getAllStudentsByNameA() {
+        return ResponseEntity.ok(studentService.getAllStudentsByNameA());
+    }
+
+    @GetMapping("/getLongIntTest1")
+    public ResponseEntity<Long> getLongIntTest1() {
+        return  ResponseEntity.ok(studentService.getLongIntTest1());
+    }
+
+    @GetMapping("/getLongIntTest2")
+    public ResponseEntity<Long> getLongIntTest2() {
+        return  ResponseEntity.ok(studentService.getLongIntTest2());
+    }
+
+    @GetMapping("/getLongIntTest3")
+    public ResponseEntity<Long> getLongIntTest3() {
+        return  ResponseEntity.ok(studentService.getLongIntTest3());
     }
 }

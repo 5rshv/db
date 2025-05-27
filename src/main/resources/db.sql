@@ -13,3 +13,5 @@ select count(id) from student;
 select round(avg(age)) from student;
 
 select * from student order by id desc limit 5;
+
+select * from DATABASECHANGELOGLOCK
