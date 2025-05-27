@@ -8,6 +8,7 @@ import skypro.hogwarts.repository.StudentRepository;
 
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.List;
 import java.util.stream.LongStream;
 
 @Service
@@ -118,4 +119,60 @@ public class StudentService {
         logger.info("information time test 3: start{} , finish{}, informationTime{}", start, finish, informationTime);
         return result;
     }
+    public List<Student> getAllStudentsInTread() {
+
+        List<Student> students =  studentRepository.findAll();
+
+        System.out.println("1. " + students.get(1).getName());
+        System.out.println("2. " + students.get(2).getName());
+
+        new Thread(() -> {
+            System.out.println("3. " + students.get(3).getName());
+            System.out.println("4. " + students.get(4).getName());
+        }).start();
+
+        new Thread(() -> {
+            System.out.println("5. " + students.get(5).getName());
+            System.out.println("6. " + students.get(6).getName());
+        }).start();
+
+        new Thread(() -> {
+            System.out.println("7. " + students.get(7).getName());
+            System.out.println("8. " + students.get(8).getName());
+        }).start();
+
+        return students;
+    }
+
+
+
+    public List<Student> getAllStudentsInTreadSynchron() {
+
+        List<Student> students =  studentRepository.findAll();
+
+        System.out.println("1. " + students.get(1).getName());
+        System.out.println("2. " + students.get(2).getName());
+
+        new Thread(() -> {
+            System.out.println("3. " + students.get(3).getName());
+            System.out.println("4. " + students.get(4).getName());
+        }).start();
+
+        new Thread(() -> {
+            System.out.println("5. " + students.get(5).getName());
+            System.out.println("6. " + students.get(6).getName());
+        }).start();
+
+        new Thread(() -> {
+            System.out.println("7. " + students.get(7).getName());
+            System.out.println("8. " + students.get(8).getName());
+        }).start();
+
+        return students;
+    }
+
+    private synchronized String synchroFlag(Student student){
+        return student.getName();
+    }
+
 }
