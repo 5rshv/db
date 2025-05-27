@@ -1,0 +1,11 @@
+---- changeset 5rshv:1
+--
+--CREATE TABLE if not exists faculty (
+--    id serial PRIMARY KEY,
+--    name TEXT,
+--    color text
+--)
+--
+---- changeset 5rshv:2
+--
+--CREATE INDEX if not exists idx_faculties_name_color ON faculty(name, color);

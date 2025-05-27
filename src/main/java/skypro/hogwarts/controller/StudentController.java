@@ -6,11 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import skypro.hogwarts.model.Student;
 import skypro.hogwarts.service.StudentService;
 
-import java.math.BigDecimal;
 import java.util.Collection;
-import java.util.stream.IntStream;
-import java.util.stream.LongStream;
-import java.util.stream.Stream;
+import java.util.List;
 
 @RestController
 @RequestMapping("/student")
@@ -99,5 +96,15 @@ public class StudentController {
     @GetMapping("/getLongIntTest3")
     public ResponseEntity<Long> getLongIntTest3() {
         return  ResponseEntity.ok(studentService.getLongIntTest3());
+    }
+
+    @GetMapping("/print-parallel")
+    public ResponseEntity<List<Student>> getAllStudentsInThread() {
+      return  ResponseEntity.ok(studentService.getAllStudentsInTread());
+    }
+
+    @GetMapping("/print-synchronized")
+    public ResponseEntity<List<Student>> getAllStudentsInTreadSynchron() {
+        return  ResponseEntity.ok(studentService.getAllStudentsInTreadSynchron());
     }
 }
