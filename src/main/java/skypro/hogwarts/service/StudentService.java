@@ -1,5 +1,6 @@
 package skypro.hogwarts.service;
 
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import skypro.hogwarts.repository.StudentRepository;
 
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.List;
 import java.util.stream.LongStream;
 
 @Service
@@ -19,6 +21,7 @@ public class StudentService {
     public StudentService(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
+    public Object synchronFlag = new Object();
 
     public Student createStudent(Student student) {
         logger.info("createStudent");
@@ -118,4 +121,58 @@ public class StudentService {
         logger.info("information time test 3: start{} , finish{}, informationTime{}", start, finish, informationTime);
         return result;
     }
-}
+    public void getAllStudentsInTread() {
+
+        List<Student> students =  studentRepository.findAll();
+
+        System.out.println("1. " + students.get(1).getName());
+        System.out.println("2. " + students.get(2).getName());
+
+        new Thread(() -> {
+            System.out.println("3. " + students.get(3).getName());
+            System.out.println("4. " + students.get(4).getName());
+        }).start();
+
+        new Thread(() -> {
+            System.out.println("5. " + students.get(5).getName());
+            System.out.println("6. " + students.get(6).getName());
+        }).start();
+
+        new Thread(() -> {
+            System.out.println("7. " + students.get(7).getName());
+            System.out.println("8. " + students.get(8).getName());
+        }).start();
+
+    }
+
+
+
+    public void getAllStudentsInTreadSynchron() {
+
+        List<Student> students =  studentRepository.findAll();
+
+        System.out.println("1. " + synchroFlag(students.get(1)));
+        System.out.println("2. " + synchroFlag(students.get(2)));
+
+        new Thread(() -> {
+            System.out.println("3. " + synchroFlag(students.get(3)));
+            System.out.println("4. " + synchroFlag(students.get(4)));
+        }).start();
+
+        new Thread(() -> {
+            System.out.println("5. " + synchroFlag(students.get(5)));
+            System.out.println("6. " + synchroFlag(students.get(6)));
+        }).start();
+
+        new Thread(() -> {
+            System.out.println("7. " + synchroFlag(students.get(7)));
+            System.out.println("8. " + synchroFlag(students.get(8)));
+        }).start();
+    }
+
+        private  String synchroFlag(Student student){
+            synchronized (synchronFlag){
+                return student.getName();
+            }
+        }
+    }
