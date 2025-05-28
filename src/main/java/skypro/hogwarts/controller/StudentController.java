@@ -99,12 +99,12 @@ public class StudentController {
     }
 
     @GetMapping("/print-parallel")
-    public ResponseEntity<List<Student>> getAllStudentsInThread() {
-      return  ResponseEntity.ok(studentService.getAllStudentsInTread());
+    public void getAllStudentsInThread() {
+      studentService.getAllStudentsInTread();
     }
 
     @GetMapping("/print-synchronized")
-    public ResponseEntity<List<Student>> getAllStudentsInTreadSynchron() {
-        return  ResponseEntity.ok(studentService.getAllStudentsInTreadSynchron());
+    public void getAllStudentsInTreadSynchron() {
+        studentService.getAllStudentsInTread();
     }
 }
